@@ -1,19 +1,18 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.scss";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="App">
+    <form className="App">
       <input type="text" />
       <input type="text" />
       <input type="text" />
-      <input type="text" />
-      <button>Calculate delivery price</button>
+      <input type="date" />
+      <input type="submit" value="Calculate delivery price" />
       <p>{count}</p>
-    </div>
+    </form>
   );
 }
 
