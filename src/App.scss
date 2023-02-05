@@ -5,15 +5,19 @@
   text-align: left;
 }
 
-.App {
+.app {
   display: flex;
   flex-direction: column;
+  form {
+    display: flex;
 
-  input {
-    max-width: 30%;
+    flex-direction: column;
+    input {
+      max-width: 375px;
+    }
   }
 
-  button {
-    max-width: 30%;
-  }
+  // button {
+  //   max-width: ;
+  // }
 }
