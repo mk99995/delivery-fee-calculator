@@ -1,33 +1,22 @@
+import { useEffect } from "react";
+
 const Form = ({
   setCartValue,
   setDistance,
   setItemsAmount,
   setDateTime,
-  dateTime,
-  cartValue,
   setAnimationTimeout,
 }: {
   setCartValue: (value: number | "") => void;
   setDistance: (distance: number | "") => void;
   setItemsAmount: (items: number | "") => void;
-  setDateTime: (time: Date) => void;
-  dateTime: Date;
-  cartValue: number | "";
-  animationTimeout: number;
+  setDateTime: (time: Date | "") => void;
   setAnimationTimeout: (animationTimeout: any) => void;
 }) => {
-  const formatDate = () => {
-    const offset = dateTime.getTimezoneOffset() * 60000; //offset in milliseconds
-    const localISOTime = new Date(Date.now() - offset)
-      .toISOString()
-      .slice(0, 16);
-    return localISOTime;
-  };
-
   const showAnimation = () => {
-    setAnimationTimeout((animationTimeout: number) => animationTimeout + 1);
+    setAnimationTimeout((current: number) => current + 1);
     setTimeout(function () {
-      setAnimationTimeout((animationTimeout: number) => animationTimeout - 1);
+      setAnimationTimeout((current: number) => current - 1);
     }, 300);
   };
 
@@ -36,28 +25,30 @@ const Form = ({
     e.target.cartValue.value = "";
     e.target.distance.value = "";
     e.target.items.value = "";
-    setCartValue("");
+    e.target.date.value = "";
     setDistance("");
     setItemsAmount("");
-    setDateTime(new Date());
+    setDateTime("");
     showAnimation();
   };
 
   return (
-    <form onReset={resetInputs}>
+    <form onReset={resetInputs} onSubmit={() => console.log("asd")}>
       <input
         name="cartValue"
+        placeholder="Cart value"
         type="number"
         min="0"
         step="0.01"
-        value={cartValue}
         onChange={(e) => {
           setCartValue(e.target.value === "" ? "" : Number(e.target.value));
           showAnimation();
         }}
       />
+      <h3>€</h3>
       <input
         name="distance"
+        placeholder="Distance"
         type="number"
         min="0"
         step="1"
@@ -66,8 +57,11 @@ const Form = ({
           showAnimation();
         }}
       />
+      <h3>m</h3>
+
       <input
         name="items"
+        placeholder="Number of items"
         type="number"
         min="1"
         step="1"
@@ -76,15 +70,17 @@ const Form = ({
           showAnimation();
         }}
       />
+
       <input
+        id="date"
+        name="date"
         type="datetime-local"
-        value={formatDate()}
         onChange={(e) => {
           setDateTime(new Date(e.target.value));
           showAnimation();
         }}
       />
-      <input type="reset" />
+      <input id="reset-button" type="reset" />
     </form>
   );
 };
