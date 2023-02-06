@@ -11,7 +11,7 @@ const Form = ({
   setDistance: (distance: number | "") => void;
   setItemsAmount: (items: number | "") => void;
   setDateTime: (time: Date | "") => void;
-  setAnimationTimeout: (animationTimeout: any) => void;
+  setAnimationTimeout: (current: any) => void;
 }) => {
   const showAnimation = () => {
     setAnimationTimeout((current: number) => current + 1);
@@ -26,6 +26,7 @@ const Form = ({
     e.target.distance.value = "";
     e.target.items.value = "";
     e.target.date.value = "";
+    setCartValue("");
     setDistance("");
     setItemsAmount("");
     setDateTime("");
