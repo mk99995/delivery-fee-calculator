@@ -34,13 +34,13 @@ function App(this: any): JSX.Element {
       //1.2€ bulk fee
       (itemsAmount > 12 ? 1.2 : 0);
     //checkin if it is friday rush time
-    if (dateTime.getDay() === 5) {
+    if (dateTime.getUTCDay() === 5) {
       let timeInThousands: number =
-        dateTime.getHours() * 100 + dateTime.getMinutes();
+        dateTime.getUTCHours() * 100 + dateTime.getUTCMinutes();
       if (timeInThousands >= 1500 && timeInThousands <= 1900) {
         fee = fee * 1.2;
       }
-    }
+    } //getDay, getHours and getMinutes can be used instead of UTC for other timezones
 
     return `Delivery price: ${
       fee > 15 ? 15 : fee % 1 === 0 ? fee : fee.toFixed(2)
