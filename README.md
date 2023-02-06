@@ -1,1 +1,1 @@
-![Alt text](./assets/Sieppaa.PNG?raw=true "Optional Title")
+![Alt text](./assets/Sieppaa.PNG "Optional Title")
