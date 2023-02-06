@@ -1,1 +1,1 @@
-![alt text](/Sieppaa.PNG?raw=true =194x340 "Title")
+![alt text](/Sieppaa.PNG =194x340 "Title")
