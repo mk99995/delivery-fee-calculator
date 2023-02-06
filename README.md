@@ -1,1 +1,1 @@
-![alt text](/Sieppaa.PNG "Title")
+![alt text](/Sieppaa.PNG?raw=true "Title")
