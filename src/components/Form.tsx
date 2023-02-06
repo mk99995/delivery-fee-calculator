@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const Form = ({
   setCartValue,
   setDistance,
@@ -11,16 +9,18 @@ const Form = ({
   setDistance: (distance: number | "") => void;
   setItemsAmount: (items: number | "") => void;
   setDateTime: (time: Date | "") => void;
-  setAnimationTimeout: (current: any) => void;
-}) => {
-  const showAnimation = () => {
-    setAnimationTimeout((current: number) => current + 1);
-    setTimeout(function () {
-      setAnimationTimeout((current: number) => current - 1);
+  setAnimationTimeout: (fx: (current: number) => number) => void;
+}): JSX.Element => {
+  //function that is run whenever any input field changes
+  //animation is played when animationTimeout < 0
+  const showAnimation = (): void => {
+    setAnimationTimeout((current) => current + 1);
+    setTimeout(function (): void {
+      setAnimationTimeout((current) => current - 1);
     }, 300);
   };
 
-  const resetInputs = (e: any) => {
+  const resetInputs = (e: any): void => {
     e.preventDefault();
     e.target.cartValue.value = "";
     e.target.distance.value = "";
@@ -34,7 +34,7 @@ const Form = ({
   };
 
   return (
-    <form onReset={resetInputs} onSubmit={() => console.log("asd")}>
+    <form onReset={resetInputs}>
       <input
         name="cartValue"
         placeholder="Cart value"
@@ -81,7 +81,7 @@ const Form = ({
           showAnimation();
         }}
       />
-      <input id="reset-button" type="reset" />
+      <input id="reset-button" type="reset" value={"Reset"} />
     </form>
   );
 };

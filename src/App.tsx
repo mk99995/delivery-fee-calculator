@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.scss";
 import Form from "./components/Form";
 import BeatLoader from "react-spinners/BeatLoader";
 
-function App(this: any) {
+function App(this: any): JSX.Element {
+  //useStates have union with "" to handle empty input fields
   const [cartValue, setCartValue] = useState<number | "">("");
   const [distance, setDistance] = useState<number | "">("");
   const [itemsAmount, setItemsAmount] = useState<number | "">("");
@@ -21,22 +22,27 @@ function App(this: any) {
       itemsAmount === "" ||
       dateTime === ""
     ) {
-      return "Need more info to calculate";
+      return "More information needed";
     }
     let fee: number =
+      //surchange when cart value is under 10
       (cartValue < 10 ? 10 - cartValue : 0) +
+      //fee from distance
       (distance <= 1000 ? 2 : Math.ceil(distance / 500)) +
+      //surchange from amount of items
       (itemsAmount < 5 ? 0 : (itemsAmount - 4) * 0.5) +
+      //1.2€ bulk fee
       (itemsAmount > 12 ? 1.2 : 0);
-
+    //checkin if it is friday rush time
     if (dateTime.getDay() === 5) {
-      let timeInThousands = dateTime.getHours() * 100 + dateTime.getMinutes();
+      let timeInThousands: number =
+        dateTime.getHours() * 100 + dateTime.getMinutes();
       if (timeInThousands >= 1500 && timeInThousands <= 1900) {
         fee = fee * 1.2;
       }
     }
 
-    return `Delivery price: ${fee < 15 ? fee : 15}€`;
+    return `Delivery price: ${fee < 15 ? fee : 15}€`; //fee cannot be more than 15€
   };
 
   return (
@@ -61,13 +67,7 @@ function App(this: any) {
           )}
         </div>
       </div>
-      <footer>
-        {dateTime !== ""
-          ? dateTime.getDay() +
-            dateTime.getHours() * 100 +
-            dateTime.getMinutes()
-          : null}
-      </footer>
+      <footer />
     </div>
   );
 }
