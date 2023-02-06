@@ -42,7 +42,9 @@ function App(this: any): JSX.Element {
       }
     }
 
-    return `Delivery price: ${fee < 15 ? fee : 15}€`; //fee cannot be more than 15€
+    return `Delivery price: ${
+      fee > 15 ? 15 : fee % 1 === 0 ? fee : fee.toFixed(2)
+    }€`; //fee cannot be more than 15€
   };
 
   return (
